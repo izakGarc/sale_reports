@@ -73,7 +73,7 @@ class SaleOrderXlsx(models.AbstractModel):
                         'city': record.partner_id.city,
                         'house_ref': record.partner_id.house_ref,
                         'country_id': record.partner_id.country_id.name,
-                        'mobile': record.partner_id.mobile,                        
+                        'phone': record.partner_id.phone,                        
                         'product_id': line.product_id.name,
                         'sku': line.product_id.default_code,
                         'product_qty': line.product_uom_qty,
@@ -197,12 +197,12 @@ class SaleOrderXlsx(models.AbstractModel):
                 },
                 'width': 15,
             },
-            'mobile': {
+            'phone': {
                 'header': {
                     'value': 'Teléfono',
                 },
                 'data': {
-                    'value': self._render('mobile'),
+                    'value': self._render('phone'),
                 },
                 'width': 15,
             },
