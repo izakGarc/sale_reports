@@ -16,9 +16,13 @@ class SaleReportWizard(models.TransientModel):
     channel_ids = fields.Many2many(
         'partner.channel',
     )
-
+    
     product_id = fields.Many2one(
         'product.product',
+    )
+
+    website_id = fields.Many2one(
+        'website',
     )
 
     partner_id = fields.Many2one(
@@ -78,6 +82,9 @@ class SaleReportWizard(models.TransientModel):
 
         if self.partner_id:
             domain.append(('partner_id', '=', self.partner_id.id))
+            
+        if self.website_id:
+            domain.append(('website_id', '=', self.website_id.id))
             
         if self.product_id:
             domain.append(('product_id', '=', self.product_id.id))
