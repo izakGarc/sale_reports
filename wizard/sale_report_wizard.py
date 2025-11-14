@@ -64,8 +64,8 @@ class SaleReportWizard(models.TransientModel):
                 'UTC'
             )
             date = datetime(self.date_start.year, self.date_start.month, self.date_start.day, 00, 00, 00, 00, user_tz)
-            domain.append(('create_date', '>=', date))
-            domain.append(('create_date', '>=', date))
+            domain.append(('date_order', '>=', date))
+            domain.append(('date_order', '>=', date))
 
         if self.date_end:
             user_tz = pytz.timezone(
@@ -74,8 +74,8 @@ class SaleReportWizard(models.TransientModel):
                 'UTC'
             )
             date = datetime(self.date_end.year, self.date_end.month, self.date_end.day, 23, 59, 59, 00, user_tz)
-            domain.append(('create_date', '<=', date))
-            domain.append(('create_date', '<=', date))
+            domain.append(('date_order', '<=', date))
+            domain.append(('date_order', '<=', date))
 
         if hasattr(self, 'channel_ids') and self.channel_ids:
             domain.append(('channel_ids', 'in', self.channel_ids.ids))
