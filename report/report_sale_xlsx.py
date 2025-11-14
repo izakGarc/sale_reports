@@ -75,6 +75,7 @@ class SaleOrderXlsx(models.AbstractModel):
                         'country_id': record.partner_id.country_id.name,
                         'mobile': record.partner_id.mobile,                        
                         'product_id': line.product_id.name,
+                        'sku': line.product_id.default_code,
                         'product_qty': line.product_uom_qty,
                         'price_unit': line.price_unit,
                         'price_subtotal': line.price_subtotal,
@@ -206,6 +207,15 @@ class SaleOrderXlsx(models.AbstractModel):
                 'width': 15,
             },
             # CAMPOS DE LÍNEA
+            'sku': {
+                'header': {
+                    'value': 'SKU',
+                },
+                'data': {
+                    'value': self._render('sku'),
+                },
+                'width': 35,
+            },
             'product_id': {
                 'header': {
                     'value': 'Producto',
