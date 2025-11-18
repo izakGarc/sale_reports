@@ -59,10 +59,9 @@ class SaleOrderXlsx(models.AbstractModel):
                     ws_params,
                     col_specs_section='data',
                     render_space={
-                        'date_order': record.date_order,
+                        'date_order': record.date_order.strftime('%d-%m-%Y %H:%M:%S'),
                         'partner_id': record.partner_id.name,
                         'ref': record.name,
-                        'date_order': record.date_order,
                         'email': record.partner_id.email,
                         'channel_ids': ', '.join(record.channel_ids.mapped('name')) if hasattr(record, 'channel_ids') else '',
                         'zip': record.partner_id.zip,
@@ -88,6 +87,15 @@ class SaleOrderXlsx(models.AbstractModel):
     def _get_ws_params(self, wb, data, sale_orders):
 
         sale_order_template = {
+            'date_order': {
+                'header': {
+                    'value': 'Fecha de Orden',
+                },
+                'data': {
+                    'value': self._render('date_order'),
+                },
+                'width': 15,
+            },
             'partner_id': {
                 'header': {
                     'value': 'Cliente',
@@ -105,15 +113,6 @@ class SaleOrderXlsx(models.AbstractModel):
                     'value': self._render('ref'),
                 },
                 'width': 20,
-            },
-            'date_order': {
-                'header': {
-                    'value': 'Fecha',
-                },
-                'data': {
-                    'value': self._render('date_order'),
-                },
-                'width': 15,
             },
             'email': {
                 'header': {
