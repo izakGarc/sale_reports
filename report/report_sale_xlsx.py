@@ -52,7 +52,6 @@ class SaleOrderXlsx(models.AbstractModel):
 
 
         for record in orders:
-            # Iterar por cada LÍNEA de la orden
             for line in record.order_line:
                 row_pos = self._write_line(
                     ws,
@@ -60,7 +59,7 @@ class SaleOrderXlsx(models.AbstractModel):
                     ws_params,
                     col_specs_section='data',
                     render_space={
-                        # Datos del encabezado (se repiten por cada línea)
+                        'date_order': record.date_order,
                         'partner_id': record.partner_id.name,
                         'ref': record.name,
                         'date_order': record.date_order,
