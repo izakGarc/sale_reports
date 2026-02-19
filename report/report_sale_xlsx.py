@@ -79,6 +79,8 @@ class SaleOrderXlsx(models.AbstractModel):
                         'price_subtotal': line.price_subtotal,
                         'price_tax': line.price_tax,
                         'price_total': line.price_total,
+                        'stripe_payment_method': record.stripe_payment_method,
+                        'stripe_payment_status': record.stripe_payment_status,
                     },
                     default_format=FORMATS['format_tcell_left'],
                 )
@@ -272,6 +274,24 @@ class SaleOrderXlsx(models.AbstractModel):
                     'format': wb.add_format({'num_format': '$#,##0.00'}),
                 },
                 'width': 15,
+            },
+            'stripe_payment_method': {
+                'header': {
+                    'value': 'Método de Pago Stripe',
+                },
+                'data': {
+                    'value': self._render('stripe_payment_method'),
+                },
+                'width': 30,
+            },
+            'stripe_payment_status': {
+                'header': {
+                    'value': 'Estado de pago',
+                },
+                'data': {
+                    'value': self._render('stripe_payment_status'),
+                },
+                'width': 30,
             },
         }
 
