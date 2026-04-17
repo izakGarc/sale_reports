@@ -13,7 +13,7 @@
     'website': "https://www.yourcompany.com",
 
     'category': 'sale',
-    'version': '16.0',
+    'version': '19.0.1.0.0',
 
     'depends': ['sale'],
 
