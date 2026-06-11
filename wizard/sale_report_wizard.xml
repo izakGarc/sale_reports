@@ -8,6 +8,7 @@
           <group>
             <field name="date_start"/>
             <field name="date_end"/>
+            <field name="state"/>
             <field name="website_id" options="{'no_create_edit' : True}"/>
             <field name="channel_ids" options="{'no_create_edit' : True}"  widget="many2many_tags"/>
             <field name="product_id" options="{'no_create_edit' : True}"/>

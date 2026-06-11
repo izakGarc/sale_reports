@@ -81,6 +81,7 @@ class SaleOrderXlsx(models.AbstractModel):
                         'price_total': line.price_total,
                         'stripe_payment_method': record.stripe_payment_method,
                         'stripe_payment_status': record.stripe_payment_status,
+                        'state': record.state,
                     },
                     default_format=FORMATS['format_tcell_left'],
                 )
@@ -290,6 +291,15 @@ class SaleOrderXlsx(models.AbstractModel):
                 },
                 'data': {
                     'value': self._render('stripe_payment_status'),
+                },
+                'width': 30,
+            },
+            'state': {
+                'header': {
+                    'value': 'Estado',
+                },
+                'data': {
+                    'value': self._render('state'),
                 },
                 'width': 30,
             },

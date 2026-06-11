@@ -24,6 +24,14 @@ class SaleReportWizard(models.TransientModel):
     website_id = fields.Many2one(
         'website',
     )
+    
+    state = fields.Selection([
+        ('draft', 'Cotización'),
+        ('sent', 'Cotización Enviada'),
+        ('sale', 'Orden de Venta'),
+        ('done', 'Bloqueado'),
+        ('cancel', 'Cancelado'),
+    ], string="Estado")
 
     partner_id = fields.Many2one(
         'res.partner',
@@ -56,6 +64,9 @@ class SaleReportWizard(models.TransientModel):
         domain = [
             ('state', '=', 'sale'),
         ]
+        
+        if self.state:
+            domain.append(('state', '=', self.state))
         
         if self.date_start:
             user_tz = pytz.timezone(
